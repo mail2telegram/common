@@ -1,0 +1,24 @@
+{
+  "name": "mail2telegram/common",
+  "license": "MIT",
+  "description": "",
+  "authors": [
+    {
+      "name": "Dmitrii Elkin",
+      "email": "de@mqwerty.ru"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "M2T\\": "src"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "psr/container": "^1.0"
+  }
+}
