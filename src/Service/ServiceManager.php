@@ -2,6 +2,7 @@
 
 namespace M2T\Service;
 
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
 
 final class ServiceManager implements ContainerInterface
