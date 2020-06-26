@@ -2,7 +2,7 @@
 
 namespace M2T;
 
-use App\Worker;
+use M2T\Worker;
 use M2T\Service\ServiceManager;
 use Psr\Container\ContainerInterface;
 use Whoops\Handler\PlainTextHandler;
