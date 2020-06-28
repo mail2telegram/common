@@ -19,15 +19,24 @@
   },
   "require": {
     "php": "^7.4",
-    "psr/container": "^1.0"
+    "psr/container": "^1.0",
+    "ext-redis": "*"
   },
   "require-dev": {
+    "codeception/codeception": "^4.1",
+    "codeception/module-asserts": "^1.2",
+    "codeception/module-redis": "^1.0",
     "filp/whoops": "^2.7",
     "phan/phan": "^3.0",
+    "phpmd/phpmd": "^2.8",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.5"
   },
   "scripts": {
+    "test": "codecept run --debug",
+    "test:cover": "codecept run unit --coverage --coverage-html",
+    "test:unit": "codecept run unit --debug",
+    "stan:md": "phpmd ./src ansi ./phpmd.xml",
     "stan:phan": "phan --color --progress-bar --allow-polyfill-parser",
     "cs:check": "phpcs ./src --standard=PSR12",
     "cs:fix": "phpcbf ./src --standard=PSR12"
