@@ -35,6 +35,6 @@ class AccountManager
      */
     public function getChats(): array
     {
-        return array_map(fn($el) => (int) ltrim($el), $this->redis->keys('account:*'));
+        return array_map(fn($el) => (int) ltrim($el, 'account:'), $this->redis->keys('account:*'));
     }
 }

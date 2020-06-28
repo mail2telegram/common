@@ -1,12 +1,14 @@
 <?php
 
 /** @noinspection PhpIllegalPsrClassPathInspection */
+
 /** @noinspection PhpUnhandledExceptionInspection */
 
+use Codeception\Test\Unit;
 use M2T\AccountManager;
 use M2T\App;
 use M2T\Model\Account;
-use Codeception\Test\Unit;
+use M2T\Model\Email;
 
 class AccountManagerBaseTest extends Unit
 {
@@ -18,7 +20,21 @@ class AccountManagerBaseTest extends Unit
     {
         parent::__construct();
         new App();
-        $this->account = App::get('test')['accounts'][0];
+        $this->account = new Account(
+            123456,
+            [
+                new Email(
+                    'mail2telegram.app@gmail.com',
+                    'XXX',
+                    'imap.gmail.com',
+                    993,
+                    'ssl',
+                    'smtp.gmail.com',
+                    465,
+                    'ssl'
+                ),
+            ]
+        );
         $this->redis = App::get(Redis::class);
     }
 
@@ -35,7 +51,7 @@ class AccountManagerBaseTest extends Unit
         $this->tester->assertEquals($account, $result);
 
         $result = $manager->getChats();
-        $this->tester->assertIsInt($result[0]);
+        $this->tester->assertContains(123456, $result, var_export($result, true));
 
         $result = $manager->delete($account->chatId);
         $this->tester->assertTrue($result);
