@@ -3,4 +3,5 @@ modules:
   enabled:
     - Asserts
     - \Helper\Unit
+    - \Helper\Data
   step_decorators: ~

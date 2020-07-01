@@ -17,7 +17,7 @@ class AccountManagerTest extends Unit
     {
         /** @var AccountManager $manager */
         $manager = App::get(AccountManager::class);
-        $account = $this->tester->accountProvider();
+        $account = $this->tester->accountProvider()[0];
 
         $result = $manager->save($account);
         $this->tester->assertTrue($result);

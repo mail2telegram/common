@@ -4,8 +4,7 @@ namespace Helper;
 
 use Codeception\Module;
 use M2T\App;
-use M2T\Model\Account;
-use M2T\Model\Email;
+use Redis;
 
 class Base extends Module
 {
@@ -13,24 +12,14 @@ class Base extends Module
     {
         /** @noinspection PhpIncludeInspection */
         require_once codecept_root_dir() . '/vendor/autoload.php';
-        new App();
-    }
-
-    public function accountProvider(): Account
-    {
-        return new Account(
-            123456,
+        new App(
             [
-                new Email(
-                    'mail2telegram.app@gmail.com',
-                    'XXX',
-                    'imap.gmail.com',
-                    993,
-                    'ssl',
-                    'smtp.gmail.com',
-                    465,
-                    'ssl'
-                ),
+                Redis::class => static function () {
+                    $connect = new Redis();
+                    $connect->pconnect(App::get('redis')['host']);
+                    $connect->select(1);
+                    return $connect;
+                },
             ]
         );
     }

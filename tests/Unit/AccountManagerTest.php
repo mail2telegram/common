@@ -6,7 +6,7 @@ namespace Unit;
 
 use Codeception\Test\Unit;
 use M2T\AccountManager;
-use M2T\App;
+use Redis;
 use UnitTester;
 
 class AccountManagerTest extends Unit
@@ -15,9 +15,13 @@ class AccountManagerTest extends Unit
 
     public function testBase(): void
     {
-        /** @var AccountManager $manager */
-        $manager = App::get(AccountManager::class);
-        $account = $this->tester->accountProvider();
+        $account = $this->tester->accountProvider()[0];
+        $redis = $this->createStub(Redis::class);
+        $redis->method('set')->willReturn(true);
+        $redis->method('get')->willReturn(serialize($account));
+        $redis->method('del')->willReturn(1);
+        $redis->method('keys')->willReturn(['account:' . $account->chatId]);
+        $manager = new AccountManager($redis);
 
         $result = $manager->save($account);
         $this->tester->assertTrue($result);
