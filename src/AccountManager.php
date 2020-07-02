@@ -14,7 +14,7 @@ class AccountManager
         $this->redis = $redis;
     }
 
-    public static function getKey(int $chatId): int
+    public static function getKey(int $chatId): string
     {
         return "account:{$chatId}";
     }
