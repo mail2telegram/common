@@ -27,7 +27,9 @@ final class App
                 ->pushHandler(new PlainTextHandler())
                 ->register();
         }
-        $config = array_merge(require './config.php', $config);
+        $configInitial = file_exists('./config.initial.php') ? require './config.initial.php' : [];
+        $configLocal = file_exists('./config.php') ? require './config.php' : [];
+        $config = array_merge($configInitial, $configLocal, $config);
         self::$serviceManager = new ServiceManager($config);
     }
 

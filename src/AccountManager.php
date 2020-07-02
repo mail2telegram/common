@@ -14,7 +14,7 @@ class AccountManager
         $this->redis = $redis;
     }
 
-    public static function getKey(int $chatId): int
+    protected static function getKey(int $chatId): string
     {
         return "account:{$chatId}";
     }
@@ -33,7 +33,7 @@ class AccountManager
     public function get(int $chatId): Account
     {
         $account = $this->load($chatId);
-        return $account == null ? new Account($chatId) : $account;
+        return $account ?? new Account($chatId);
     }
 
     public function delete(int $chatId): bool
