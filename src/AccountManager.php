@@ -14,7 +14,7 @@ class AccountManager
         $this->redis = $redis;
     }
 
-    public static function getKey(int $chatId) : int
+    public static function getKey(int $chatId): int
     {
         return "account:{$chatId}";
     }
@@ -30,7 +30,7 @@ class AccountManager
         return $data ? unserialize($data, [Account::class]) : null;
     }
 
-    public function get(int $chatId) : Account
+    public function get(int $chatId): Account
     {
         $account = $this->load($chatId);
         return $account == null ? new Account($chatId) : $account;
