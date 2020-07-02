@@ -7,8 +7,8 @@ class Account
     /** @var Email[] */
     public array $emails;
     public int $chatId;
-    public ?string $step;
-    public ?string $process;
+    public ?string $step = null;
+    public ?string $process = null;
 
     public function __construct(
         int $chatId,
