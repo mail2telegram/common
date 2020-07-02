@@ -14,20 +14,31 @@ class AccountManager
         $this->redis = $redis;
     }
 
+    public static function getKey(int $chatId) : int
+    {
+        return "account:{$chatId}";
+    }
+
     public function save(Account $account): bool
     {
-        return $this->redis->set("account:{$account->chatId}", serialize($account));
+        return $this->redis->set(static::getKey($account->chatId), serialize($account));
     }
 
     public function load(int $chatId): ?Account
     {
-        $data = $this->redis->get("account:{$chatId}");
+        $data = $this->redis->get(static::getKey($chatId));
         return $data ? unserialize($data, [Account::class]) : null;
+    }
+
+    public function get(int $chatId) : Account
+    {
+        $account = $this->load($chatId);
+        return $account == null ? new Account($chatId) : $account;
     }
 
     public function delete(int $chatId): bool
     {
-        return 1 === $this->redis->del("account:{$chatId}");
+        return 1 === $this->redis->del(static::getKey($chatId));
     }
 
     /**

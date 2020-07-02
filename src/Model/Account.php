@@ -10,7 +10,7 @@ class Account
 
     public function __construct(
         int $chatId,
-        array $emails
+        array $emails = []
     ) {
         $this->chatId = $chatId;
         $this->emails = $emails;
