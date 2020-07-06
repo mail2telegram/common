@@ -19,8 +19,9 @@
   },
   "require": {
     "php": "^7.4",
-    "psr/container": "^1.0",
-    "ext-redis": "*"
+    "ext-redis": "*",
+    "mqwerty/dependency-injection": "^1.1",
+    "psr/container": "^1.0"
   },
   "require-dev": {
     "codeception/codeception": "^4.1",

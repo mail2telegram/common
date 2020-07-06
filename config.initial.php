@@ -1,18 +1,16 @@
 <?php
 
-use M2T\App;
-
 return [
     'redis' => [
         'host' => 'm2t_redis',
     ],
-    Redis::class => static function () {
+    Redis::class => static function ($c) {
         static $connect;
         if (null === $connect) {
             $connect = new Redis();
         }
         if (!$connect->isConnected()) {
-            $config = App::get('redis');
+            $config = $c->get('redis');
             if (!$connect->pconnect(
                 $config['host'],
                 $config['port'] ?? 6379,

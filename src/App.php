@@ -3,19 +3,20 @@
 namespace M2T;
 
 use M2T\Worker;
-use M2T\Service\ServiceManager;
+use Mqwerty\DI\Container;
 use Psr\Container\ContainerInterface;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Run;
 
 final class App
 {
-    private static ContainerInterface $serviceManager;
+    private static ContainerInterface $dic;
 
     /**
      * @suppress PhanUndeclaredClassReference
      * @suppress PhanUndeclaredClassMethod
      * @suppress PhanMissingRequireFile
+     * @noinspection PhpIncludeInspection
      * @param array $config
      */
     public function __construct(array $config = [])
@@ -30,12 +31,9 @@ final class App
         $configInitial = file_exists('./config.initial.php') ? require './config.initial.php' : [];
         $configLocal = file_exists('./config.php') ? require './config.php' : [];
         $config = array_merge($configInitial, $configLocal, $config);
-        self::$serviceManager = new ServiceManager($config);
+        self::$dic = new Container($config);
     }
 
-    /**
-     * @suppress PhanUndeclaredClassReference
-     */
     public function run(): void
     {
         self::get(Worker::class)->loop();
@@ -43,12 +41,18 @@ final class App
 
     public static function has(string $id): bool
     {
-        return self::$serviceManager->has($id);
+        return self::$dic->has($id);
     }
 
     public static function get(string $id)
     {
         /** @noinspection PhpUnhandledExceptionInspection */
-        return self::$serviceManager->get($id);
+        return self::$dic->get($id);
+    }
+
+    public static function build(string $id, array $params = [])
+    {
+        /** @noinspection PhpUnhandledExceptionInspection */
+        return self::$dic->build($id, $params);
     }
 }
