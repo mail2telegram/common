@@ -2,12 +2,9 @@
 
 namespace M2T\Model;
 
-/**
- * @property Email[] $emails
- * @property DraftEmail|null $draftEmail
- * */
 class Account
 {
+    /** @var Email[] */
     public array $emails;
     public int $chatId;
     public ?string $step;

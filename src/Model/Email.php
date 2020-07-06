@@ -36,19 +36,16 @@ class Email
         $this->selected = $selected;
     }
 
-
-    public function getSettings(){
+    public function getSettings(): string
+    {
         return
-            '<strong>email:</strong> '.$this->email.PHP_EOL.
-            '<strong>password:</strong> ***'.PHP_EOL.
-            //'<strong>password:</strong> '.$this->pwd.PHP_EOL.
-            '<strong>imapHost:</strong> '.$this->imapHost.PHP_EOL.
-            '<strong>imapPort:</strong> '.$this->imapPort.PHP_EOL.
-            '<strong>imapSocketType:</strong> '.$this->imapSocketType.PHP_EOL.
-            '<strong>smtpHost:</strong> '.$this->smtpHost.PHP_EOL.
-            '<strong>smtpPort:</strong> '.$this->smtpPort.PHP_EOL.
-            '<strong>smtpSocketType:</strong> '.$this->smtpSocketType
-            ;
+            '<strong>email:</strong> ' . $this->email . PHP_EOL .
+            '<strong>password:</strong> ***' . PHP_EOL .
+            '<strong>imapHost:</strong> ' . $this->imapHost . PHP_EOL .
+            '<strong>imapPort:</strong> ' . $this->imapPort . PHP_EOL .
+            '<strong>imapSocketType:</strong> ' . $this->imapSocketType . PHP_EOL .
+            '<strong>smtpHost:</strong> ' . $this->smtpHost . PHP_EOL .
+            '<strong>smtpPort:</strong> ' . $this->smtpPort . PHP_EOL .
+            '<strong>smtpSocketType:</strong> ' . $this->smtpSocketType;
     }
-
 }

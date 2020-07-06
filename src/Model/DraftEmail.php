@@ -1,8 +1,6 @@
 <?php
 
-
 namespace M2T\Model;
-
 
 class DraftEmail
 {
@@ -16,8 +14,7 @@ class DraftEmail
         string $to = '',
         string $subject = '',
         string $message = ''
-    )
-    {
+    ) {
         $this->from = $from;
         $this->to = $to;
         $this->subject = $subject;
