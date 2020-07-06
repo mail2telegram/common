@@ -12,7 +12,6 @@ class Email
     public string $smtpHost;
     public int $smtpPort;
     public string $smtpSocketType;
-    public bool $selected;
 
     public function __construct(
         string $email,
@@ -22,8 +21,7 @@ class Email
         string $imapSocketType,
         string $smtpHost,
         string $smtpPort,
-        string $smtpSocketType,
-        bool $selected = false
+        string $smtpSocketType
     ) {
         $this->email = $email;
         $this->pwd = $pwd;
@@ -33,7 +31,6 @@ class Email
         $this->smtpHost = $smtpHost;
         $this->smtpPort = $smtpPort;
         $this->smtpSocketType = $smtpSocketType;
-        $this->selected = $selected;
     }
 
     public function getSettings(): string

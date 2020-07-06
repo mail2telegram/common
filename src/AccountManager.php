@@ -31,26 +31,12 @@ class AccountManager
         return $data ? unserialize($data, [Account::class]) : null;
     }
 
-    public function get(int $chatId): Account
-    {
-        $account = $this->load($chatId);
-        return $account ?? new Account($chatId);
-    }
-
     public function delete(int $chatId): bool
     {
         return 1 === $this->redis->del(static::getKey($chatId));
     }
 
-    public function setAllEmailsNotSelected(Account $account): bool
-    {
-        foreach ($account->emails as $email) {
-            $email->selected = false;
-        }
-        return $this->save($account);
-    }
-
-    public function checkExistEmail(Account $account, string $email): bool
+    public function mailboxExist(Account $account, string $email): bool
     {
         foreach ($account->emails as $existEmail) {
             if ($email === $existEmail->email) {
@@ -60,34 +46,23 @@ class AccountManager
         return false;
     }
 
-    public function getSelectedEmail(Account $account): ?Email
+    public function mailboxGet(Account $account, string $email): ?Email
     {
-        foreach ($account->emails as $existEmail) {
-            if ($existEmail->selected) {
-                return $existEmail;
+        foreach ($account->emails as $mailbox) {
+            if ($email === $mailbox->email) {
+                return $mailbox;
             }
         }
         return null;
     }
 
-    public function getEmail(Account $account, string $email): ?Email
+    public function mailboxDelete(Account $account, string $email): bool
     {
-        foreach ($account->emails as $existEmail) {
-            if ($email === $existEmail->email) {
-                return $existEmail;
-            }
-        }
-        return null;
-    }
-
-    public function deleteEmail(Account $account, string $email): bool
-    {
-        foreach ($account->emails as $key => $existEmail) {
-            if ($email === $existEmail->email) {
+        foreach ($account->emails as $key => $mailbox) {
+            if ($email === $mailbox->email) {
                 unset($account->emails[$key]);
                 $account->emails = array_values($account->emails);
-                $this->save($account);
-                return true;
+                return $this->save($account);
             }
         }
         return false;

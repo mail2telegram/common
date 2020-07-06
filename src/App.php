@@ -34,6 +34,9 @@ final class App
         self::$dic = new Container($config);
     }
 
+    /**
+     * @suppress PhanUndeclaredClassReference
+     */
     public function run(): void
     {
         self::get(Worker::class)->loop();
