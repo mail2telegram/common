@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3f3201f2a70b4530da690dd8aa20606",
+    "content-hash": "9889e70efaf1b67404f725e89709a18f",
     "packages": [
+        {
+            "name": "mqwerty/dependency-injection",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mqwerty/dependency-injection.git",
+                "reference": "14ee922b63c36cf8772c2b335c93c8eccd184bc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mqwerty/dependency-injection/zipball/14ee922b63c36cf8772c2b335c93c8eccd184bc9",
+                "reference": "14ee922b63c36cf8772c2b335c93c8eccd184bc9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4",
+                "psr/container": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^3.0",
+                "phpmd/phpmd": "^2.8",
+                "phpunit/phpunit": "^9.2",
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mqwerty\\DI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitrii Elkin",
+                    "email": "de@mqwerty.ru"
+                }
+            ],
+            "description": "Simple PSR-11 DI container with autowiring",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "dependency injection",
+                "di",
+                "ioc",
+                "psr11"
+            ],
+            "time": "2020-07-06T11:16:32+00:00"
+        },
         {
             "name": "psr/container",
             "version": "1.0.0",
