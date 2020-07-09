@@ -2,15 +2,15 @@
 
 namespace M2T;
 
+use M2T\Interfaces\ICrypto;
 use M2T\Worker;
 use Mqwerty\DI\Container;
-use Psr\Container\ContainerInterface;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Run;
 
 final class App
 {
-    private static ContainerInterface $dic;
+    private static Container $dic;
 
     /**
      * @suppress PhanUndeclaredClassReference
@@ -57,5 +57,15 @@ final class App
     {
         /** @noinspection PhpUnhandledExceptionInspection */
         return self::$dic->build($id, $params);
+    }
+
+    public static function encrypt(string $data): string
+    {
+        return self::get(ICrypto::class)->encrypt($data);
+    }
+
+    public static function decrypt(string $encrypted): string
+    {
+        return self::get(ICrypto::class)->decrypt($encrypted);
     }
 }

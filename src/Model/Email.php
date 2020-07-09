@@ -2,10 +2,12 @@
 
 namespace M2T\Model;
 
+use M2T\App;
+
 class Email
 {
     public string $email;
-    public string $pwd;
+    protected string $pwd;
     public string $imapHost;
     public int $imapPort;
     public string $imapSocketType;
@@ -24,7 +26,7 @@ class Email
         string $smtpSocketType
     ) {
         $this->email = $email;
-        $this->pwd = $pwd;
+        $this->setPwd($pwd);
         $this->imapHost = $imapHost;
         $this->imapPort = $imapPort;
         $this->imapSocketType = $imapSocketType;
@@ -44,5 +46,16 @@ class Email
             '<strong>smtpHost:</strong> ' . $this->smtpHost . PHP_EOL .
             '<strong>smtpPort:</strong> ' . $this->smtpPort . PHP_EOL .
             '<strong>smtpSocketType:</strong> ' . $this->smtpSocketType;
+    }
+
+    public function getPwd(): string
+    {
+        return App::decrypt($this->pwd);
+    }
+
+    public function setPwd(string $pwd): self
+    {
+        $this->pwd = App::encrypt($pwd);
+        return $this;
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
+use M2T\Interfaces\ICrypto;
+use Mqwerty\Crypto;
+
 return [
+    'cryptoKey' => 'XXX',
     'redis' => [
         'host' => 'm2t_redis',
     ],
@@ -24,4 +28,5 @@ return [
         }
         return $connect;
     },
+    ICrypto::class => fn($c) => new Crypto(($c->get('cryptoKey'))),
 ];
