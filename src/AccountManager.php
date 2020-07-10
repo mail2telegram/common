@@ -56,6 +56,16 @@ class AccountManager
         return null;
     }
 
+    public function mailboxGetByHash(Account $account, string $hash): ?Email
+    {
+        foreach ($account->emails as $mailbox) {
+            if ($hash === md5($mailbox->email)) {
+                return $mailbox;
+            }
+        }
+        return null;
+    }
+
     public function mailboxDelete(Account $account, string $email): bool
     {
         foreach ($account->emails as $key => $mailbox) {
