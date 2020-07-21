@@ -4,7 +4,7 @@ namespace Helper;
 
 use Codeception\Module;
 use M2T\Model\Account;
-use M2T\Model\Email;
+use M2T\Model\Mailbox;
 
 class Data extends Module
 {
@@ -17,7 +17,7 @@ class Data extends Module
             new Account(
                 123456,
                 [
-                    new Email(
+                    new Mailbox(
                         'mail2telegram.app@gmail.com',
                         'XXX',
                         'imap.gmail.com',

@@ -3,7 +3,7 @@
 namespace M2T;
 
 use M2T\Model\Account;
-use M2T\Model\Email;
+use M2T\Model\Mailbox;
 use Redis;
 
 class AccountManager
@@ -46,7 +46,7 @@ class AccountManager
         return false;
     }
 
-    public function mailboxGet(Account $account, string $email): ?Email
+    public function mailboxGet(Account $account, string $email): ?Mailbox
     {
         foreach ($account->emails as $mailbox) {
             if ($email === $mailbox->email) {
@@ -56,7 +56,7 @@ class AccountManager
         return null;
     }
 
-    public function mailboxGetByHash(Account $account, string $hash): ?Email
+    public function mailboxGetByHash(Account $account, string $hash): ?Mailbox
     {
         foreach ($account->emails as $mailbox) {
             if ($hash === md5($mailbox->email)) {

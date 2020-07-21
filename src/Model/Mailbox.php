@@ -4,7 +4,7 @@ namespace M2T\Model;
 
 use M2T\App;
 
-class Email
+class Mailbox
 {
     public string $email;
     protected string $pwd;

@@ -4,7 +4,7 @@ namespace M2T\Model;
 
 class Account
 {
-    /** @var Email[] */
+    /** @var Mailbox[] */
     public array $emails;
     public int $chatId;
 
